@@ -12,24 +12,69 @@ var WebApp = {
     },
     ReadFile: function(FileObject) {
         // console.log('FileObject', FileObject);
-        
         WebApp.Elements.MovieDisplay.innerHTML = '';
         
+        if(!WebApp.Elements.FileListDisplay.files){
+            WebApp.Elements.FileListDisplay.files = {};
+        }
         
-        var extension = FileObject.name.split('.').pop().toLowerCase();
+        var fileElement = document.createElement('div');
+        
+        var fileInfo = document.createElement('span');
+        var fileVideo = document.createElement('video');
+        
+        fileVideo.setAttribute('controls','true');
+        
+        // fileVideo.style.height='100%';
+        fileVideo.style.height='150px';
+        fileVideo.style.width='100%';
+        
+        
+        fileElement.className="LocalFileDisplay";
+        fileInfo.className="LocalFileDisplayInfo";
+        fileVideo.className="LocalFileDisplayVideo";
+        
+        
+        fileElement.FileInfo = fileElement.appendChild(fileInfo);
+        fileElement.FileVideo = fileElement.appendChild(fileVideo);
+        
+        
+        var FileRecord = {
+            name:FileObject.name,
+            ext:FileObject.name.split('.').pop().toLowerCase(),
+            file:FileObject,
+            element:fileElement
+        };
+        
+        fileInfo.innerHTML = FileRecord.name;
+        
+        //Keep track of the files we are using by doing a memory map...
+        WebApp.Elements.FileListDisplay.files[FileObject.name] = FileRecord;
+        
+        
+        //Tell the UI we have a brand spanking new HTML element for it to display..
+        WebApp.Elements.FileListDisplay.appendChild(FileRecord.element);
+        
+        
         
         //Rather than read the file to make sure it's video, we just use the file extension...
-        if(extension!='mp4'){
+        if(FileRecord.ext!='mp4'){
             // debugger;
             alert('We are only doing MP4 files for now.');
             return;
         }
 
-        WebApp.ActiveFile = FileObject;
+        // WebApp.ActiveFile = FileObject;
 
         var fileReader = new FileReader();
+        fileReader.FileRecord = FileRecord;
         fileReader.onload = function(event) {
-            WebApp.Elements.MovieElement.setAttribute("src", event.target.result);
+            var doh = this.FileRecord;
+            console.log(FileRecord.element.FileVideo)
+            console.log(FileRecord.element)
+            // debugger
+            FileRecord.element.FileVideo.setAttribute("src", event.target.result);
+            // WebApp.Elements.MovieElement.setAttribute("src", event.target.result);
         };
         fileReader.readAsDataURL(FileObject);
     },
@@ -114,6 +159,7 @@ window.onload = function() {
     WebApp.Elements.MovieDisplay = document.getElementById('MovieDisplay');
     WebApp.Elements.FileElement = document.getElementById('FileElement');
     WebApp.Elements.MovieElement = document.getElementById('MovieElement');
+    WebApp.Elements.FileListDisplay = document.getElementById('FileListDisplay');
 
 
     WebApp.Elements.MovieListDisplay = document.getElementById('MovieListDisplay');

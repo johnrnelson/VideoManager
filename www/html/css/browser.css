@@ -36,3 +36,18 @@ video{
 .commands:hover{
     color:black;
 }
+
+
+.LocalFileDisplay{
+    position: relative;
+    
+    background-color:green;
+    border:solid 4px green;
+}
+.LocalFileDisplay .LocalFileDisplayInfo{
+    /*height:150px;*/
+    /*background-color:blue;*/
+    color:blue;
+    font-size:10px;
+}
+ 
