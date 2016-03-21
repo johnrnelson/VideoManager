@@ -1,3 +1,6 @@
+#Uploads need not go to github. :-)
+www/html/uploads*
+
 # Logs
 logs
 *.log
