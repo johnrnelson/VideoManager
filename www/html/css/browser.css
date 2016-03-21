@@ -41,8 +41,8 @@ video{
 .LocalFileDisplay{
     position: relative;
     
-    background-color:green;
-    border:solid 4px green;
+    background-color:gray;
+    border:solid 1px black;
 }
 .LocalFileDisplay .LocalFileDisplayInfo{
     /*height:150px;*/
