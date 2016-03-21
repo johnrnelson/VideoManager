@@ -111,11 +111,9 @@ var WebApp = {
                     alert(resMSG.errmsg);
                 }
                 else {
-
-                    console.log(FileRecord.element);
-                    console.log(WebApp.Elements.FileListDisplay.files);
-                    var sFileRecord = FileRecord;
-                    // debugger;
+                    
+                    
+                    // once it's uploaded we do not need it anymore!
                     FileRecord.element.parentElement.remove(FileRecord.element);
                     delete WebApp.Elements.FileListDisplay.files[FileRecord.name]
 
