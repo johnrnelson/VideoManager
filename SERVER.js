@@ -23,7 +23,7 @@ var path = require('path');
 //Just create the uploads folder if it's not there! 
 fs.mkdir(CONFIG.PATHS.UPLOADS, function(err) {
     if (err) {
-        console.log('Unable to create the uploads folder...');
+        console.log('Using existing uploads folder...');
     }
     else {
         console.log('Creating the uploads folder...');
