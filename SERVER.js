@@ -29,35 +29,35 @@ var path = require('path');
     send out a response... :-)
 */
 function WebService(Request, Response) {
-    
+
     var url_parts = url.parse(Request.url, true);
-    
+
     //Path is part of the routing...
     var pathname = url_parts.pathname;
-    
-    //We use headers for routing and discovering...
-    var headders = Request.headers; 
 
-    
+    //We use headers for routing and discovering...
+    var headders = Request.headers;
+
+
     // Just in case you need some extra information about the route..
     var query = url_parts.query;
 
-    
-    
+
+
     /*
         We use the route variable of the header to figure out what the client 
         really wants to do. An easy switch statement lets us branch off the 
         reactions the server has to the choices the client made....
     */
     switch (headders.route) {
-        /*
-            The user wants to remove a file on the server. We assume ,if they 
-            use this application at all, then they are privileged enough to 
-            tell the server to delete a file in our predetermined upload 
-            folder...
-        */
         case "remove":
-            fs.unlink(CONFIG.PATHS.UPLOADS + pathname,  function(err, files) {
+            /*
+                The user wants to remove a file on the server. We assume ,if they 
+                use this application at all, then they are privileged enough to 
+                tell the server to delete a file in our predetermined upload 
+                folder...
+            */
+            fs.unlink(CONFIG.PATHS.UPLOADS + pathname, function(err, files) {
                 if (err) {
                     debugger;
                 }
@@ -75,69 +75,70 @@ function WebService(Request, Response) {
             });
             // fs.readdir(CONFIG.PATHS.UPLOADS,x);
             break
-        /*
-            The user needs a complete list of files we have in our upload 
-            folder. We just use file names for now. Later we can include stats 
-            like file datetime or size....
-        */
         case "list":
+            /*
+                The user needs a complete list of files we have in our upload 
+                folder. We just use file names for now. Later we can include stats 
+                like file datetime or size....
+            */
             fs.readdir(CONFIG.PATHS.UPLOADS, function(err, files) {
                 if (err) {
                     debugger;
-
                 }
                 else {
                     Response.writeHead(200, {
                         "Content-Type": "application/json"
                     });
-
                     Response.end(JSON.stringify(files));
-
                 }
             });
             break
         case "upload":
-           
-
-            Request.on('data', function(data) { 
-                // chunk is the Uint8Array object
+            /*
+                The user is sending raw binary data so just stuff it in the 
+                file. No need to try and process or analyze anything here. 
+                Basic read and write is all we need...
+            */
+            Request.on('data', function(data) {
+                //Date in goes right to the file...
                 fs.appendFile(CONFIG.PATHS.UPLOADS + pathname, new Buffer(data), 'binary', function(err) {
                     if (err) {
+                        //Yikes... check permissions...
                         debugger;
                     }
                 });
             });
             Request.on('end', function() {
-
                 Response.writeHead(200, {
                     "Content-Type": "application/json"
                 });
-
                 Response.end(JSON.stringify({
                     errmsg: '' //No error means no problems...
                 }));
-
-
             });
             break;
 
 
         default:
-            //if all else fails then we fall back on this bad boy...
-            switch (pathname) {
-                case "/":
-                    pathname = '/index.html';
-                    break; 
-                default:
-                    if ((pathname == '') | (pathname == '/')) {
-                        pathname = 'HTML/index.html'
-                    }
-                    break;
+            /*
+                So the user did not supply a header value to let us know how to 
+                route. Therefore we simply do a basic file read and write based 
+                on the content type. Nothing dynamic: just file in and out. 
+                The only exception is if there is no path name. Then we 
+                substitute the index.html file as an assumption.... 
+            */
+            if ((pathname == '') | (pathname == '/')) {
+                pathname = '/index.html'
             }
 
+
+            
+            //Make sure the client is not trying to do the hacky thing...
             var path2file = CONFIG.PATHS.WEB + path.normalize(pathname);
             var typeOfFile = GetFileTypeByFilePath(pathname);
 
+            
+            
             if (typeOfFile == 'video/mp4') {
                 var range = headders.range;
                 if (!range) {
@@ -184,7 +185,6 @@ function WebService(Request, Response) {
 
 
                 }
-
             }
             else {
                 //Serve up the static files...
@@ -418,7 +418,7 @@ try {
 
 
     // Configure our HTTP server to respond to network requests...
-    var server = http.createServer(WebService).listen(CONFIG.TCP_PORT); 
+    var server = http.createServer(WebService).listen(CONFIG.TCP_PORT);
 
     // Put a friendly message on the terminal...
     console.log("Server running on port:" + CONFIG.TCP_PORT + '\r\nNode Version  ...' + process.version);
