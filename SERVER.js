@@ -87,7 +87,6 @@ function WebService(Request, Response) {
 
                 }
                 else {
-
                     Response.writeHead(200, {
                         "Content-Type": "application/json"
                     });
