@@ -35,12 +35,14 @@ node SERVER.js
 * **Client**: Tested on Chrome.
 
 #Modifing
-Edit the SERVER.js config variable to change where files are located.
 
+Edit the SERVER.js file and change the config variable to set where files are located. Use the default if your not worried about security or multiple users uploading the same file at the same time kind of stuff (race conditions).
 
 
 #Goals
-Let's see what we can do with some JavaScript.
+Let's see what we can do with some JavaScript and maybe get a joby job.
+
+
 
 ##Features
 Allow a user to upload and download their MP4 videos. 
