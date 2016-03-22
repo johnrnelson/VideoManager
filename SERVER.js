@@ -258,16 +258,10 @@ try {
     // Configure our HTTP server to respond to network requests...
     var server = http.createServer(WebService).listen(CONFIG.TCP_PORT);
 
-    // Put a friendly message on the terminal...
+    // Put a friendly message in the terminal...
     console.log('Node Version  ...' + process.version);
-    console.log('HHH  ...' + require('os').hostname());
-    // console.log("Server running on port:" + CONFIG.TCP_PORT);
-
-    require('dns').lookup(require('os').hostname(), function(err, add, fam) {
-        console.log('addr: ' + add);
-    })
-
-    // console.log("Server :" + JSON.stringify(serverAddyInfo));
+    console.log('Open your browser and go to http://' + require('os').hostname()+':'+CONFIG.TCP_PORT);
+ 
 
 
 } //Ok done with trying... catch any errors that might happen and kick it to the console...
