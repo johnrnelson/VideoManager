@@ -15,7 +15,7 @@ var WebApp = {
             Read the file and wrap a record around it so we can keep all the 
             information about a file in one place...
         */
-debugger;
+// debugger;
 
         var FileRecord = {
             name: FileObject.name,
@@ -70,7 +70,7 @@ debugger;
 
 
 
-        fileIconUpload.className = "fa fa-cloud-upload  fa-2x";
+        fileIconUpload.className = "commands fa fa-cloud-upload  fa-2x";
         fileIconUpload.filename = FileRecord.name;
         fileIconUpload.onclick = function() {
             var FileRecord = WebApp.Elements.FileListDisplay.files[this.filename];
@@ -78,7 +78,7 @@ debugger;
         }
 
 
-        fileIconClose.className = "fa fa-times-circle fa-2x";
+        fileIconClose.className = "commands fa fa-times-circle fa-2x";
         fileIconClose.filename = FileRecord.name;
         fileIconClose.onclick = function() {
             var FileRecord = WebApp.Elements.FileListDisplay.files[this.filename];
