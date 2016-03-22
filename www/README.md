@@ -1,5 +1,6 @@
 #WWW files to be served up through HTTP
 
+This is where you should place your web files that are exposed to the network. 
+Files will be served up as is with no modifications just like apache or other web servers.
 
-
-* Use the html folder to drop your web files. Edit the SERVER.js config if you change it around.
+Any other media/binary files you want to use should go here instead of the normal html folder.

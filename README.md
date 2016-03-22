@@ -5,6 +5,7 @@ This is an example project to show how easy it is to use JavaScript for almost e
 
 ## Index
 - [Installation](#installation)
+- [Modifing](#modifing)
 - [Goals](#goals)
 
 
@@ -32,6 +33,10 @@ node SERVER.js
 
 * **Server**: Tested on linux.
 * **Client**: Tested on Chrome.
+
+#Modifing
+Edit the SERVER.js config variable to change where files are located.
+
 
 
 #Goals
