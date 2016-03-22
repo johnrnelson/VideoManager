@@ -21,6 +21,31 @@ var fs = require('fs');
 var path = require('path');
 
 
+// fs.exists(CONFIG.PATHS.UPLOADS, function(exists) {
+//     if (!exists) {
+//         // Do something
+//         fs.mkdir(CONFIG.PATHS.UPLOADS, function(err) {
+//             if (err) {
+
+//             }
+//             else{
+
+//             } 
+//         });
+//     }
+// });
+fs.mkdir(CONFIG.PATHS.UPLOADS, function(err) {
+    if (err) {
+        console.log('Unable to create the uploads folder...');
+        process.exit(0);
+    }
+    else {
+
+    }
+});
+
+
+
 
 
 
@@ -233,7 +258,7 @@ function GetFileTypeByFilePath(FilePath) {
         ".mp4v": "video/mp4",
         ".mpeg": "video/mpeg",
         ".mpg": "video/mpeg",
-          
+
     };
 
 
@@ -260,8 +285,8 @@ try {
 
     // Put a friendly message in the terminal...
     console.log('Node Version  ...' + process.version);
-    console.log('Open your browser and go to http://' + require('os').hostname()+':'+CONFIG.TCP_PORT);
- 
+    console.log('Open your browser and go to http://' + require('os').hostname() + ':' + CONFIG.TCP_PORT);
+
 
 
 } //Ok done with trying... catch any errors that might happen and kick it to the console...
