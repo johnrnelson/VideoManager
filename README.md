@@ -1,13 +1,17 @@
-#Quick and Easy Video Uploads
-
-
-** Found some bugs and new features to add so still working on it. 
-
-** Yes I will complete the documentation. I'm not just putting it off. lol
-
-
-
 ![alt text](/www/html/images/supervista_videoproduction_overlay_track_manager_128.png "Video Manager")
+
+#Quick and Easy Video Upload Manager
+This is an example project to show how easy it is to use JavaScript for almost everything. It is a working demo and can be used at home for lightweight videos (small file size) and multiple users at a time. 
+
+
+
+## Index
+- [Installation?](#installation)
+- [Goals](#goals)
+ 
+
+
+
 
 
 #Installation
@@ -31,7 +35,15 @@ node SERVER.js
 * **Client**: Tested on Chrome.
 
 
-##Original Design Goals Sunday March 20th 2016
+#Goals
+Let's see what we can do with some JavaScript.
+
+##Features
+Allow a user to upload and download their MP4 videos. 
+
+##Original Design Goals
+Sent to me on  Sunday March 20th 2016:
+
 The goal of this project is to create a web application with the following goals:
 
 - A user needs to be able to upload any video to the web application server
