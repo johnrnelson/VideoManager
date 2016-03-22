@@ -34,8 +34,6 @@ fs.mkdir(CONFIG.PATHS.UPLOADS, function(err) {
 
 
 
-
-
 /*
     This is your actual web server. Based on the request it will 
     send out a response... :-)
