@@ -1,14 +1,15 @@
 #Quick and Easy Video Upload Manager
 This is an example project to show how easy it is to use JavaScript for almost everything. It is a working demo and can be used at home for lightweight videos (small file size) and multiple users at a time. 
 
+![alt text](/www/html/images/supervista_videoproduction_overlay_track_manager_128.png "Video Manager")
 
 ## Index
 - [Installation](#installation)
 - [Goals](#goals)
 
 
-![alt text](/www/html/images/supervista_videoproduction_overlay_track_manager_128.png "Video Manager")
-
+## Issues
+    Please let me know about problems you might have: <https://github.com/johnrnelson/VideoManager/issues>
 
 
 
