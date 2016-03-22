@@ -1,17 +1,21 @@
 /*
-
-
+    First, setup any special values you want for this server to recognize and respect. Treat the CONFIG variable/object as the golden 
+    rule of this server... 
 */
 var CONFIG = {
     PATHS: {
         WEB: __dirname + '/www/html',
         UPLOADS: __dirname + '/www/html/uploads'
     },
-    TCP_PORT: 4000
+    TCP_PORT: 4000 //Change this to another TCP/IP Port if you like...
 };
 
-var http = require('http');
 
+
+/*
+    Bring in the required libraries we plan on using in the scope of this source file....
+*/
+var http = require('http');
 var url = require('url');
 var fs = require('fs');
 var path = require('path');
@@ -38,13 +42,24 @@ function WebService(Request, Response) {
     // Just in case you need some extra information about the route..
     var query = url_parts.query;
 
+    
+    
+    /*
+        We use the route variable of the header to figure out what the client 
+        really wants to do. An easy switch statement lets us branch off the 
+        reactions the server has to the choices the client made....
+    */
     switch (headders.route) {
-
+        /*
+            The user wants to remove a file on the server. We assume ,if they 
+            use this application at all, then they are privileged enough to 
+            tell the server to delete a file in our predetermined upload 
+            folder...
+        */
         case "remove":
             fs.unlink(CONFIG.PATHS.UPLOADS + pathname,  function(err, files) {
                 if (err) {
                     debugger;
-
                 }
                 else {
 
@@ -60,7 +75,11 @@ function WebService(Request, Response) {
             });
             // fs.readdir(CONFIG.PATHS.UPLOADS,x);
             break
-
+        /*
+            The user needs a complete list of files we have in our upload 
+            folder. We just use file names for now. Later we can include stats 
+            like file datetime or size....
+        */
         case "list":
             fs.readdir(CONFIG.PATHS.UPLOADS, function(err, files) {
                 if (err) {
