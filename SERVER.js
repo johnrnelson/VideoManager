@@ -37,9 +37,9 @@ var path = require('path');
 fs.mkdir(CONFIG.PATHS.UPLOADS, function(err) {
     if (err) {
         console.log('Unable to create the uploads folder...');
-        process.exit(0);
     }
     else {
+        console.log('Creating the uploads folder...');
 
     }
 });
