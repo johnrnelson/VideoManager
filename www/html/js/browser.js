@@ -1,11 +1,11 @@
 /*
     This is the browser code that setups up events and features that this 
-    browser can handle. 
+    browser can handle. We use the normal WebApp name space to keep the 
+    features together and to keep it SIMPLE! 
+    
 */
 
 var WebApp = {
-    //Set the active file after dragging or file dialog...
-    ActiveFile: null,
     Elements: {
         //We keep track of the major UI elements so we don't spend too much time
         //looking them up everytime they are used... :-)
@@ -33,7 +33,7 @@ var WebApp = {
             return;
         }
 
-        // console.log('FileObject', FileObject);
+        //clear out any movie display information that was once there. We just read a file so old stuff out!
         WebApp.Elements.MovieDisplay.innerHTML = '';
 
         if (!WebApp.Elements.FileListDisplay.files) {
@@ -50,12 +50,11 @@ var WebApp = {
 
         var fileVideo = document.createElement('video');
 
-        fileVideo.setAttribute('controls', 'true');
-        // // fileVideo.style.height='100%';
-        // fileVideo.style.height = '150px';
-        // fileVideo.style.width = '100%';
+        fileVideo.setAttribute('controls', 'true'); 
 
-
+        /*
+            Use CSS to dress shit up.. WHEN YOU CAN!!!
+        */
         fileElement.className = "LocalFileDisplay";
         fileInfo.className = "LocalFileDisplayInfo";
         fileVideo.className = "LocalFileDisplayVideo";
@@ -65,9 +64,6 @@ var WebApp = {
         fileElement.FileIconClose = fileElement.appendChild(fileIconClose);
         fileElement.FileInfo = fileElement.appendChild(fileInfo);
         fileElement.FileVideo = fileElement.appendChild(fileVideo);
-
-
-
 
 
         fileIconUpload.className = "commands fa fa-cloud-upload  fa-2x";
@@ -99,10 +95,9 @@ var WebApp = {
 
         //Tell the UI we have a brand spanking new HTML element for it to display..
         WebApp.Elements.FileListDisplay.appendChild(FileRecord.element);
-
-
-        // WebApp.ActiveFile = FileObject;
-
+ 
+        
+        //Read the file and pump the contents into the source of the video tag....
         var fileReader = new FileReader();
         fileReader.FileRecord = FileRecord;
         fileReader.onload = function(event) {
@@ -237,9 +232,15 @@ var WebApp = {
             oReq.send(uInt8Array.buffer);
         };
         reader.onerror = function(e) {
-            debugger;
+            /*
+                Hey now.. this is some bad juju.. By the time you get here you 
+                have already got the file handle.
+            */
             console.error(e);
+            debugger;
         };
+        
+        //Just the binary ma'am.. just the binary...
         reader.readAsArrayBuffer(FileRecord.file);
 
     },
@@ -248,9 +249,6 @@ var WebApp = {
 
 
 window.onload = function() {
-
-
-
     /*
         We are going to assume the designers have HTML elements that let the user 
         control the main parts of the app.
@@ -267,22 +265,16 @@ window.onload = function() {
 
 
 
+    //Go get the list of files on the server so we can look at them when we want...
     WebApp.GetList();
-    // return;
+    
 
     //Provides the open file dialog...
     WebApp.Elements.FileElement.addEventListener('change', function(e) {
         WebApp.ReadFile(e.target.files[0]);
     }, false);
 
-
-    document.body.oncontextmenu = function() {
-        return false;
-    };
-    document.body.onselectstart = function() {
-        return false;
-    };
-
+ 
 
 
     /*
