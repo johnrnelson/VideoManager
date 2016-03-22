@@ -24,32 +24,36 @@ div {
     
 }
 
-/*.DropFile{*/
-/*    display:none;*/
-/*    height:100%;     */
-/*    width:100%;     */
-    
-/*    color:white;*/
-/*    background-color:black;*/
-/*} */
 .commands{
     color:blue;
+    padding:5px;
 }
 .commands:hover{
     color:black;
 }
 
-
+/*
+This is the wrapper for the local file
+used when open or dragging...
+*/
 .LocalFileDisplay{
     position: relative;
     
     /*background-color:gray;*/
     border:solid 1px gray;
+    margin-top:10px
 }
 .LocalFileDisplay .LocalFileDisplayInfo{
-    /*height:150px;*/
-    /*background-color:blue;*/
-    color:blue;
-    font-size:10px;
+    text-align: center;
+    color:black;
+    font-size:12px;
+}
+ 
+.LocalFileDisplay .LocalFileDisplayVideo{
+    height:150px;
+    width:100%;
+    /*margin:5px;*/
+    padding:5px;
+    
 }
  

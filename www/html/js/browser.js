@@ -51,9 +51,9 @@ var WebApp = {
         var fileVideo = document.createElement('video');
 
         fileVideo.setAttribute('controls', 'true');
-        // fileVideo.style.height='100%';
-        fileVideo.style.height = '150px';
-        fileVideo.style.width = '150px';
+        // // fileVideo.style.height='100%';
+        // fileVideo.style.height = '150px';
+        // fileVideo.style.width = '100%';
 
 
         fileElement.className = "LocalFileDisplay";
@@ -72,6 +72,7 @@ var WebApp = {
 
         fileIconUpload.className = "commands fa fa-cloud-upload  fa-2x";
         fileIconUpload.filename = FileRecord.name;
+        fileIconUpload.title = 'Click me to upload this file';
         fileIconUpload.onclick = function() {
             var FileRecord = WebApp.Elements.FileListDisplay.files[this.filename];
             WebApp.UploadFile(FileRecord);
@@ -80,6 +81,7 @@ var WebApp = {
 
         fileIconClose.className = "commands fa fa-times-circle fa-2x";
         fileIconClose.filename = FileRecord.name;
+        fileIconClose.title = 'Click to remove this file';
         fileIconClose.onclick = function() {
             var FileRecord = WebApp.Elements.FileListDisplay.files[this.filename];
             
