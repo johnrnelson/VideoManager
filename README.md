@@ -5,6 +5,11 @@
 
 ** Yes I will complete the documentation. I'm not just putting it off. lol
 
+
+
+![alt text](/www/html/images/supervista_videoproduction_overlay_track_manager_128.png "Video Manager")
+
+
 #Installation
 You will need Node.js for this bad boy. Binaries, installers, and source tarballs are available at
 <https://nodejs.org>. Every OS has an options so have fun with it.
