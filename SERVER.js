@@ -20,20 +20,7 @@ var url = require('url');
 var fs = require('fs');
 var path = require('path');
 
-
-// fs.exists(CONFIG.PATHS.UPLOADS, function(exists) {
-//     if (!exists) {
-//         // Do something
-//         fs.mkdir(CONFIG.PATHS.UPLOADS, function(err) {
-//             if (err) {
-
-//             }
-//             else{
-
-//             } 
-//         });
-//     }
-// });
+//Just create the uploads folder if it's not there! 
 fs.mkdir(CONFIG.PATHS.UPLOADS, function(err) {
     if (err) {
         console.log('Unable to create the uploads folder...');
