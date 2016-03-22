@@ -9,7 +9,7 @@ This is an example project to show how easy it is to use JavaScript for almost e
 
 
 ## Issues
-    Please let me know about problems you might have: <https://github.com/johnrnelson/VideoManager/issues>
+Please let me know about problems you might have: <https://github.com/johnrnelson/VideoManager/issues>
 
 
 
