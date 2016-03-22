@@ -1,0 +1,16 @@
+{
+  "name": "JohnBox",
+  "version": "0.0.20",
+  "description": "My generic system code...",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:johnrnelson/VideoManager.git"
+  },
+  "keywords": [
+    "bug",
+    "log"
+  ],
+  "author": "John Nelson <me@johnrnelson.com> (https://www.johnrnelson.com/)",
+  "license": "BSD-2-Clause",
+  "dependencies": {  }
+}

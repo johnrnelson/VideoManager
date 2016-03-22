@@ -11,6 +11,24 @@ var WebApp = {
         //looking them up everytime they are used... :-)
     },
     ReadFile: function(FileObject) {
+
+
+        var FileRecord = {
+            name: FileObject.name,
+            ext: FileObject.name.split('.').pop().toLowerCase(),
+            file: FileObject,
+            element: fileElement
+        };
+        
+
+
+        //Rather than read the file to make sure it's video, we just use the file extension...
+        if (FileRecord.ext != 'mp4') {
+            // debugger;
+            alert('We are only doing MP4 files for now.');
+            return;
+        }
+
         // console.log('FileObject', FileObject);
         WebApp.Elements.MovieDisplay.innerHTML = '';
 
@@ -19,6 +37,7 @@ var WebApp = {
         }
 
         var fileElement = document.createElement('div');
+        FileRecord.element=fileElement;
 
         var fileInfo = document.createElement('span');
         var fileIconUpload = document.createElement('i');
@@ -43,12 +62,7 @@ var WebApp = {
         fileElement.FileVideo = fileElement.appendChild(fileVideo);
 
 
-        var FileRecord = {
-            name: FileObject.name,
-            ext: FileObject.name.split('.').pop().toLowerCase(),
-            file: FileObject,
-            element: fileElement
-        };
+        
 
 
         fileIconUpload.className = "fa fa-cloud-upload";
@@ -68,14 +82,6 @@ var WebApp = {
         //Tell the UI we have a brand spanking new HTML element for it to display..
         WebApp.Elements.FileListDisplay.appendChild(FileRecord.element);
 
-
-
-        //Rather than read the file to make sure it's video, we just use the file extension...
-        if (FileRecord.ext != 'mp4') {
-            // debugger;
-            alert('We are only doing MP4 files for now.');
-            return;
-        }
 
         // WebApp.ActiveFile = FileObject;
 

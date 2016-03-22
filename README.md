@@ -1,5 +1,12 @@
 #Quick and Easy Video Uploads
 
+
+** Found some bugs and new features to add so still working on it. 
+
+** Yes I will complete the documentation. I'm not just putting it off. lol
+
+
+#Original Design Goals
 The goal of this project is to create a web application with the following goals:
 
 - A user needs to be able to upload any video to the web application server
