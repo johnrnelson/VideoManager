@@ -197,18 +197,19 @@ var WebApp = {
             oReq.open("POST", '/' + FileRecord.name, true);
             //We use headers to tell the server what to do. This way we don't mess up the body...
             oReq.setRequestHeader("route", "upload");
-
+            
+            /*
+                The progress does not fire the way you think.. we leave the code in for future reflection...
+            */
             oReq.addEventListener("progress", function(oEvent) {
                 
                 if (oEvent.lengthComputable) {
                     var percentComplete = oEvent.loaded / oEvent.total;
-                    console.log(percentComplete,oEvent.loaded,oEvent.total)
-                    // ...
+                    console.log('Hey go update the client now that you know what you doing...',percentComplete,oEvent.loaded,oEvent.total);
                 }
                 else {
-                    // debugger;
-                    console.log('Just upload......',oEvent);
                     // Unable to compute progress information since the total size is unknown
+                    console.log('Just upload a big ole mess of binary data..',oEvent);
                 }
 
             });
@@ -225,6 +226,8 @@ var WebApp = {
                     WebApp.Elements.FileListDisplay.removeChild(FileRecord.element);
                     delete WebApp.Elements.FileListDisplay.files[FileRecord.name]
 
+                    //Go back to the server and get a fresh list of files. Maybe somebody 
+                    //else uploaded.. you know how those race conditions can get ugly... :-)
                     WebApp.GetList();
 
                 }
