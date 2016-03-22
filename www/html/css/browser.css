@@ -62,9 +62,16 @@ used when open or dragging...
     color:brown;
 }
 
+.RemoteFileDisplay .RemoteFileName{
+    color:gray;
+    padding:2px;
+    font-size:18px;
+    
+}
 .RemoteFileDisplay .commands{
     color:black;
     padding:2px;
+    
 }
 .RemoteFileDisplay .commands:hover{
     color:gray;

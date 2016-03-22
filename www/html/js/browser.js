@@ -110,47 +110,6 @@ var WebApp = {
         };
         fileReader.readAsDataURL(FileObject);
     },
-    UploadFile: function(FileRecord) {
-
-        // debugger;
-        /*
-            Upload the active file by converting into an array and sending 
-            it out a new connection to the server...
-        */
-        var oReq = new XMLHttpRequest();
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            oReq.open("POST", '/' + FileRecord.name, true);
-            //We use headers to tell the server what to do. This way we don't mess up the body...
-            oReq.setRequestHeader("route", "upload");
-
-            oReq.onload = function(oEvent) {
-                var resMSG = JSON.parse(oReq.responseText);
-                if (resMSG.errmsg != "") {
-                    alert(resMSG.errmsg);
-                }
-                else {
-
-
-                    // once it's uploaded we do not need it anymore!
-                    WebApp.Elements.FileListDisplay.removeChild(FileRecord.element);
-                    delete WebApp.Elements.FileListDisplay.files[FileRecord.name]
-
-                    WebApp.GetList();
-
-                }
-            };
-
-            var uInt8Array = new Uint8Array(e.target.result);
-            oReq.send(uInt8Array.buffer);
-        };
-        reader.onerror = function(e) {
-            debugger;
-            console.error(e);
-        };
-        reader.readAsArrayBuffer(FileRecord.file);
-
-    },
     GetList: function() {
         var oReq = new XMLHttpRequest();
         oReq.open("GET", '/', true);
@@ -175,6 +134,7 @@ var WebApp = {
 
 
                 fileElement.className = "RemoteFileDisplay";
+                fileElementName.className = "RemoteFileName";
 
                 fileElementCloseButton.className = "commands fa fa-times-circle";
                 fileElementPlayButton.className = "commands fa fa-play-circle";
@@ -222,6 +182,62 @@ var WebApp = {
 
         oReq.send();
 
+
+    },
+    UploadFile: function(FileRecord) {
+
+        // debugger;
+        /*
+            Upload the active file by converting into an array and sending 
+            it out a new connection to the server...
+        */
+        var oReq = new XMLHttpRequest();
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            oReq.open("POST", '/' + FileRecord.name, true);
+            //We use headers to tell the server what to do. This way we don't mess up the body...
+            oReq.setRequestHeader("route", "upload");
+
+            oReq.addEventListener("progress", function(oEvent) {
+                
+                if (oEvent.lengthComputable) {
+                    var percentComplete = oEvent.loaded / oEvent.total;
+                    console.log(percentComplete,oEvent.loaded,oEvent.total)
+                    // ...
+                }
+                else {
+                    // debugger;
+                    console.log('Just upload......',oEvent);
+                    // Unable to compute progress information since the total size is unknown
+                }
+
+            });
+
+            oReq.onload = function(oEvent) {
+                var resMSG = JSON.parse(oReq.responseText);
+                if (resMSG.errmsg != "") {
+                    alert(resMSG.errmsg);
+                }
+                else {
+
+
+                    // once it's uploaded we do not need it anymore!
+                    WebApp.Elements.FileListDisplay.removeChild(FileRecord.element);
+                    delete WebApp.Elements.FileListDisplay.files[FileRecord.name]
+
+                    WebApp.GetList();
+
+                }
+            };
+
+            var uInt8Array = new Uint8Array(e.target.result);
+            oReq.send(uInt8Array.buffer);
+        };
+        reader.onerror = function(e) {
+            debugger;
+            console.error(e);
+        };
+        reader.readAsArrayBuffer(FileRecord.file);
 
     },
 };
