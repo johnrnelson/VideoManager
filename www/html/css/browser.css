@@ -17,19 +17,21 @@ div {
     color: black;
     cursor: default; 
 }
-video{
+.MainVideo{
+    
     width:100%;
     height:400px;
+    
 }
 
-.DropFile{
-    display:none;
-    height:100%;     
-    width:100%;     
+/*.DropFile{*/
+/*    display:none;*/
+/*    height:100%;     */
+/*    width:100%;     */
     
-    color:white;
-    background-color:black;
-} 
+/*    color:white;*/
+/*    background-color:black;*/
+/*} */
 .commands{
     color:blue;
 }
@@ -41,8 +43,8 @@ video{
 .LocalFileDisplay{
     position: relative;
     
-    background-color:gray;
-    border:solid 1px black;
+    /*background-color:gray;*/
+    border:solid 1px gray;
 }
 .LocalFileDisplay .LocalFileDisplayInfo{
     /*height:150px;*/

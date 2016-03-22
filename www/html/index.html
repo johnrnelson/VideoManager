@@ -19,11 +19,6 @@
 
     <body>
 
-        <!--<div id="DropFileDisplay" class="DropFile">-->
-            <!--<file id="FileElement" style="display:none"></file>-->
-        <!--    Drop your files by releasing the button on your mouse.-->
-
-        <!--</div>-->
         <div id="MainDisplay" class="row  animated fadeIn">
 
             <div class="col-sm-4">
@@ -34,16 +29,15 @@
                         Your Movies
                     </div>
                     <div class="panel-body">
-                        <i class="commands fa fa-folder-open fa-3x" onclick="WebApp.Elements.FileElement.click()"></i>
-                        <!--<i class="commands fa fa-file-video-o fa-3x" onclick="WebApp.Elements.FileElement.click()"></i>-->
-                        <!--<i class="commands fa fa-cloud-upload fa-3x" onclick="WebApp.UploadFile();"></i>-->
+                        <i class="commands fa fa-folder-open fa-2x" onclick="WebApp.Elements.FileElement.click()"></i>
+                        <pan>OPEN FILE</pan>
 
-                        <div id="FileListDisplay"></div> 
+                        <div id="FileListDisplay"> </div>
 
                     </div>
                 </div>
                 <div class="panel panel-default ">
-                    
+
                     <div class="panel-heading">
                         Server Movies
                     </div>
@@ -59,7 +53,7 @@
 
 
 
-                <div class="panel panel-default ">
+                <div class="panel panel-defaultx ">
 
                     <div class="panel-body">
                         <div id="MovieDisplay">
@@ -70,7 +64,7 @@
                             A good article on how to use the video tag is at....
                             http://www.html5rocks.com/en/tutorials/video/basics/ 
                         -->
-                        <video id="MovieElement" controls></video>
+                        <video class="MainVideo" id="MovieElement" controls style="display:none"></video>
                     </div>
                 </div>
 

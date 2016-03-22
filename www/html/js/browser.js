@@ -11,7 +11,11 @@ var WebApp = {
         //looking them up everytime they are used... :-)
     },
     ReadFile: function(FileObject) {
-
+        /*
+            Read the file and wrap a record around it so we can keep all the 
+            information about a file in one place...
+        */
+debugger;
 
         var FileRecord = {
             name: FileObject.name,
@@ -19,7 +23,7 @@ var WebApp = {
             file: FileObject,
             element: fileElement
         };
-        
+
 
 
         //Rather than read the file to make sure it's video, we just use the file extension...
@@ -37,19 +41,19 @@ var WebApp = {
         }
 
         var fileElement = document.createElement('div');
-        FileRecord.element=fileElement;
+        FileRecord.element = fileElement;
 
-        var fileInfo = document.createElement('span');
+        var fileInfo = document.createElement('div');
         var fileIconUpload = document.createElement('i');
+        var fileIconClose = document.createElement('i');
 
 
         var fileVideo = document.createElement('video');
 
         fileVideo.setAttribute('controls', 'true');
-
         // fileVideo.style.height='100%';
         fileVideo.style.height = '150px';
-        fileVideo.style.width = '100%';
+        fileVideo.style.width = '150px';
 
 
         fileElement.className = "LocalFileDisplay";
@@ -58,18 +62,30 @@ var WebApp = {
 
 
         fileElement.FileIconUpload = fileElement.appendChild(fileIconUpload);
+        fileElement.FileIconClose = fileElement.appendChild(fileIconClose);
         fileElement.FileInfo = fileElement.appendChild(fileInfo);
         fileElement.FileVideo = fileElement.appendChild(fileVideo);
 
 
-        
 
 
-        fileIconUpload.className = "fa fa-cloud-upload";
+
+        fileIconUpload.className = "fa fa-cloud-upload  fa-2x";
         fileIconUpload.filename = FileRecord.name;
         fileIconUpload.onclick = function() {
             var FileRecord = WebApp.Elements.FileListDisplay.files[this.filename];
             WebApp.UploadFile(FileRecord);
+        }
+
+
+        fileIconClose.className = "fa fa-times-circle fa-2x";
+        fileIconClose.filename = FileRecord.name;
+        fileIconClose.onclick = function() {
+            var FileRecord = WebApp.Elements.FileListDisplay.files[this.filename];
+            
+            // once it's uploaded we do not need it anymore!
+            WebApp.Elements.FileListDisplay.removeChild(FileRecord.element);
+            delete WebApp.Elements.FileListDisplay.files[FileRecord.name]
         }
 
 
@@ -88,12 +104,7 @@ var WebApp = {
         var fileReader = new FileReader();
         fileReader.FileRecord = FileRecord;
         fileReader.onload = function(event) {
-            var doh = this.FileRecord;
-            console.log(FileRecord.element.FileVideo)
-            console.log(FileRecord.element)
-                // debugger
             FileRecord.element.FileVideo.setAttribute("src", event.target.result);
-            // WebApp.Elements.MovieElement.setAttribute("src", event.target.result);
         };
         fileReader.readAsDataURL(FileObject);
     },
@@ -117,10 +128,10 @@ var WebApp = {
                     alert(resMSG.errmsg);
                 }
                 else {
-                    
-                    
+
+
                     // once it's uploaded we do not need it anymore!
-                    FileRecord.element.parentElement.remove(FileRecord.element);
+                    WebApp.Elements.FileListDisplay.removeChild(FileRecord.element);
                     delete WebApp.Elements.FileListDisplay.files[FileRecord.name]
 
                     WebApp.GetList();
@@ -155,6 +166,9 @@ var WebApp = {
                 fileElement.FileName = file;
                 fileElement.innerHTML = fileElement.FileName;
                 fileElement.onclick = function(e) {
+                    // MainVideo
+                    WebApp.Elements.MovieDisplay.innerHTML = 'Playing ' + this.FileName + ' from the server.';
+                    WebApp.Elements.MovieElement.style.display = '';
                     WebApp.Elements.MovieElement.setAttribute('src', '/uploads/' + this.FileName);
                 }
                 WebApp.Elements.MovieListDisplay.appendChild(fileElement);
