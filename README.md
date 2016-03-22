@@ -5,8 +5,28 @@
 
 ** Yes I will complete the documentation. I'm not just putting it off. lol
 
+#Installation
+You will need Node.js for this bad boy. Binaries, installers, and source tarballs are available at
+<https://nodejs.org>. Every OS has an options so have fun with it.
 
-#Original Design Goals
+Once it's installed check the installation.
+
+```
+node -v
+```
+
+Download the zip file and extract it to a brand new folder. Open a command line in that folder and
+use node to open the SERVER.js file from this project.
+```
+node SERVER.js
+```
+
+
+* **Server**: Tested on linux.
+* **Client**: Tested on Chrome.
+
+
+##Original Design Goals Sunday March 20th 2016
 The goal of this project is to create a web application with the following goals:
 
 - A user needs to be able to upload any video to the web application server
