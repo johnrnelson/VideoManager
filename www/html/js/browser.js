@@ -15,7 +15,7 @@ var WebApp = {
             Read the file and wrap a record around it so we can keep all the 
             information about a file in one place...
         */
-// debugger;
+        // debugger;
 
         var FileRecord = {
             name: FileObject.name,
@@ -84,7 +84,7 @@ var WebApp = {
         fileIconClose.title = 'Click to remove this file';
         fileIconClose.onclick = function() {
             var FileRecord = WebApp.Elements.FileListDisplay.files[this.filename];
-            
+
             // once it's uploaded we do not need it anymore!
             WebApp.Elements.FileListDisplay.removeChild(FileRecord.element);
             delete WebApp.Elements.FileListDisplay.files[FileRecord.name]
@@ -165,20 +165,64 @@ var WebApp = {
             for (var f = files.length; f--;) {
                 var file = files[f];
                 var fileElement = document.createElement('div');
+                var fileElementName = document.createElement('span');
+                var fileElementCloseButton = document.createElement('i');
+                var fileElementPlayButton = document.createElement('i');
+
                 fileElement.FileName = file;
-                fileElement.innerHTML = fileElement.FileName;
-                fileElement.onclick = function(e) {
-                    // MainVideo
-                    WebApp.Elements.MovieDisplay.innerHTML = 'Playing ' + this.FileName + ' from the server.';
-                    WebApp.Elements.MovieElement.style.display = '';
-                    WebApp.Elements.MovieElement.setAttribute('src', '/uploads/' + this.FileName);
+
+                fileElementName.innerHTML = fileElement.FileName;
+
+
+                fileElement.className = "RemoteFileDisplay";
+
+                fileElementCloseButton.className = "commands fa fa-times-circle";
+                fileElementPlayButton.className = "commands fa fa-play-circle";
+
+                fileElementCloseButton.onclick = function(e) {
+                    WebApp.RemoveFile(this.parentElement.FileName);
                 }
+
+                fileElementPlayButton.onclick = function(e) {
+                    WebApp.Elements.MovieDisplay.innerHTML = 'Playing ' + this.parentElement.FileName + ' from the server.';
+                    WebApp.Elements.MovieElement.style.display = '';
+                    WebApp.Elements.MovieElement.setAttribute('src', '/uploads/' + this.parentElement.FileName);
+                }
+
+
+                fileElement.appendChild(fileElementCloseButton);
+                fileElement.appendChild(fileElementPlayButton);
+                fileElement.appendChild(fileElementName);
                 WebApp.Elements.MovieListDisplay.appendChild(fileElement);
             }
-            // debugger;
         };
 
         oReq.send();
+    },
+    RemoveFile: function(FileName) {
+
+        // debugger;
+        /*
+            Tell the server to remove a file.
+        */
+        var oReq = new XMLHttpRequest();
+        oReq.open("POST", '/' + FileName, true);
+        //We use headers to tell the server what to do. This way we don't mess up the body...
+        oReq.setRequestHeader("route", "remove");
+
+        oReq.onload = function(oEvent) {
+            var resMSG = JSON.parse(oReq.responseText);
+            if (resMSG.errmsg != "") {
+                alert(resMSG.errmsg);
+            }
+            else {
+                WebApp.GetList();
+            }
+        };
+
+        oReq.send();
+
+
     },
 };
 

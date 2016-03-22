@@ -56,4 +56,16 @@ used when open or dragging...
     padding:5px;
     
 }
- 
+
+
+.RemoteFileDisplay{
+    color:brown;
+}
+
+.RemoteFileDisplay .commands{
+    color:black;
+    padding:2px;
+}
+.RemoteFileDisplay .commands:hover{
+    color:gray;
+} 

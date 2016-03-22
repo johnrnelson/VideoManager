@@ -40,8 +40,28 @@ function WebService(Request, Response) {
 
     switch (headders.route) {
 
-        case "list":
+        case "remove":
+            fs.unlink(CONFIG.PATHS.UPLOADS + pathname,  function(err, files) {
+                if (err) {
+                    debugger;
 
+                }
+                else {
+
+                    Response.writeHead(200, {
+                        "Content-Type": "application/json"
+                    });
+
+                    Response.end(JSON.stringify({
+                        errmsg: '' //No error means no problems...
+                    }));
+
+                }
+            });
+            // fs.readdir(CONFIG.PATHS.UPLOADS,x);
+            break
+
+        case "list":
             fs.readdir(CONFIG.PATHS.UPLOADS, function(err, files) {
                 if (err) {
                     debugger;
@@ -89,19 +109,7 @@ function WebService(Request, Response) {
             switch (pathname) {
                 case "/":
                     pathname = '/index.html';
-                    break;
-                case "/list":
-
-                    function LIst() {
-                        Response.writeHead(200, {
-                            "Content-Type": GetFileTypeByFilePath(pathname)
-                        });
-
-                        Response.end('{x:1}');
-                    }
-
-                    return;
-                    break;
+                    break; 
                 default:
                     if ((pathname == '') | (pathname == '/')) {
                         pathname = 'HTML/index.html'
